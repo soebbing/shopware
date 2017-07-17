@@ -106,6 +106,7 @@ Ext.define('Shopware.apps.Category.view.category.tabs.Settings', {
         defaultSettingsNameLabel : '{s name=view/settings_default_settings_name_label}Description{/s}',
         defaultSettingsLinkExternalPageLabel : '{s name=view/settings_default_settings_link_external_page_label}Link to an external site{/s}',
         defaultSettingsLinkExternalPageHelp : '{s name=view/settings_default_settings_link_external_page_help}The URL must begin with: http://{/s}',
+        defaultSettingsLinkExternalPageTarget : '{s name=view/settings_default_settings_link_external_page_target}Open external page in new tab{/s}',
 
         defaultSettingsImageLabel : '{s name=view/settings_default_settings_image_label}Image{/s}',
         defaultSettingsImageButtonText : '{s name=view/settings_default_settings_image_button_text}Select an image{/s}',
@@ -413,6 +414,14 @@ Ext.define('Shopware.apps.Category.view.category.tabs.Settings', {
                 helpText:me.snippets.defaultSettingsLinkExternalPageHelp,
                 dataIndex:'external',
                 name:'external'
+            },
+            {
+                xtype: 'checkbox',
+                fieldLabel: me.snippets.defaultSettingsLinkExternalPageTarget,
+                dataIndex: 'externalTarget',
+                name: 'externalTarget',
+                uncheckedValue: false,
+                inputValue: true
             },
             {
                 xtype:'mediaselectionfield',

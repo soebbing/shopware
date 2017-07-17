@@ -80,6 +80,7 @@ Ext.define('Shopware.apps.Category.model.Detail', {
         { name : 'active', type: 'boolean' },
         { name : 'blog', type: 'boolean' },
         { name : 'external', type: 'string' , useNull:true, defaultValue: null},
+        { name : 'externalTarget', type: 'boolean' },
         { name : 'hideFilter', type: 'boolean' },
         { name : 'hideTop', type: 'boolean' },
         { name : 'imagePath', type: 'string' , useNull:true, defaultValue: null},

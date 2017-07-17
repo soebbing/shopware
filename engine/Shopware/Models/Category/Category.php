@@ -267,6 +267,15 @@ class Category extends ModelEntity
     private $external;
 
     /**
+     * Open the external url in a new tab?
+     *
+     * @var bool
+     *
+     * @ORM\Column(name="external_target", type="boolean", nullable=false)
+     */
+    private $externalTarget;
+
+    /**
      * Should any filter shown on the category page be hidden?
      *
      * @var int
@@ -751,6 +760,28 @@ class Category extends ModelEntity
     public function getExternal()
     {
         return $this->external;
+    }
+
+    /**
+     * Gets the flag if external source is opened in a new window
+     *
+     * @return bool
+     */
+    public function getExternalTarget()
+    {
+        return $this->externalTarget;
+    }
+
+    /**
+     * Sets the flag if external source is opened in a new window
+     *
+     * @param string $externalTarget
+     *
+     * @return bool
+     */
+    public function setExternalTarget($externalTarget)
+    {
+        $this->externalTarget = $externalTarget;
     }
 
     /**

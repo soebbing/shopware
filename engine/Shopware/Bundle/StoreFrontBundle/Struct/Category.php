@@ -109,6 +109,11 @@ class Category extends Extendable implements \JsonSerializable
     protected $externalLink;
 
     /**
+     * @var bool
+     */
+    protected $externalTarget;
+
+    /**
      * @var Media
      */
     protected $media;
@@ -318,6 +323,22 @@ class Category extends Extendable implements \JsonSerializable
     public function getExternalLink()
     {
         return $this->externalLink;
+    }
+
+    /**
+     * @param bool $externalTarget
+     */
+    public function setExternalTarget($externalTarget)
+    {
+        $this->externalTarget = $externalTarget;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getExternalTarget()
+    {
+        return $this->externalTarget;
     }
 
     /**

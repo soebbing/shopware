@@ -12,7 +12,8 @@
                        href="{$category.link}"
                        data-categoryId="{$category.id}"
                        data-fetchUrl="{url module=widgets controller=listing action=getCategory categoryId={$category.id}}"
-                       title="{$category.description|escape}">
+                       title="{$category.description|escape}"
+                       {if $category.target}target="_blank"{/if}>
                         {$category.description}
 
                         {if $category.childrenCount}

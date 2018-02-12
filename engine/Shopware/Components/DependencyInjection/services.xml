@@ -380,6 +380,8 @@
             <argument type="service" id="config" />
         </service>
 
+        <service id="filesystem" class="Symfony\Component\Filesystem\Filesystem" />
+
         <service id="file_system" class="Symfony\Component\Filesystem\Filesystem" />
 
         <service id="first_run_wizard_plugin_store" class="Shopware\Bundle\PluginInstallerBundle\Service\FirstRunWizardPluginStoreService">

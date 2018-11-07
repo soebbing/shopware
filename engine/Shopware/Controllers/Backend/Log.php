@@ -286,7 +286,7 @@ class Shopware_Controllers_Backend_Log extends Shopware_Controllers_Backend_ExtJ
     /**
      * Returns an array of all log files in the given directory.
      *
-     * @param $logDir
+     * @param string $logDir
      *
      * @return array
      */
@@ -312,8 +312,8 @@ class Shopware_Controllers_Backend_Log extends Shopware_Controllers_Backend_ExtJ
     /**
      * Checks whether the specified log file exists in the log directory. If so, he returns it.
      *
-     * @param $files
-     * @param null $name
+     * @param array  $files
+     * @param string $name
      *
      * @return false|string
      */
@@ -329,7 +329,7 @@ class Shopware_Controllers_Backend_Log extends Shopware_Controllers_Backend_ExtJ
     }
 
     /**
-     * @param $files
+     * @param array $files
      *
      * @return false|string
      */

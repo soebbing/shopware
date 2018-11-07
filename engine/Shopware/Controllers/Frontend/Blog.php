@@ -30,7 +30,7 @@ use Shopware\Components\Random;
  * Contains the logic for the listing of the blog articles and the detail page.
  * Furthermore it will manage the blog comment handling
  *
- * @category  Shopware
+ * @category Shopware
  *
  * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
@@ -216,7 +216,7 @@ class Shopware_Controllers_Frontend_Blog extends Enlight_Controller_Action
                 continue;
             }
 
-            /** @var $media \Shopware\Bundle\StoreFrontBundle\Struct\Media */
+            /** @var \Shopware\Bundle\StoreFrontBundle\Struct\Media $media */
             $media = $medias[$mediaId];
             $media = $this->get('legacy_struct_converter')->convertMediaStruct($media);
 
@@ -288,7 +288,7 @@ class Shopware_Controllers_Frontend_Blog extends Enlight_Controller_Action
         }
 
         // Redirect if category is not available, inactive or external
-        /** @var $category \Shopware\Models\Category\Category */
+        /** @var \Shopware\Models\Category\Category $category */
         $category = $this->getCategoryRepository()->find($blogArticleData['categoryId']);
         if ($category === null || !$category->getActive()) {
             $location = ['controller' => 'index'];
@@ -351,7 +351,7 @@ class Shopware_Controllers_Frontend_Blog extends Enlight_Controller_Action
         $visitedBlogItems = Shopware()->Session()->visitedBlogItems;
         if (!Shopware()->Session()->Bot && !in_array($blogArticleId, $visitedBlogItems)) {
             // Update the views count
-            /* @var $blogModel Shopware\Models\Blog\Blog */
+            /* @var Shopware\Models\Blog\Blog $blogModel */
             $blogModel = $this->getRepository()->find($blogArticleId);
             if ($blogModel) {
                 $blogModel->setViews($blogModel->getViews() + 1);
@@ -383,6 +383,7 @@ class Shopware_Controllers_Frontend_Blog extends Enlight_Controller_Action
     public function ratingAction()
     {
         $blogArticleId = (int) $this->Request()->getParam('blogArticle');
+        $sErrorFlag = null;
 
         if (!empty($blogArticleId)) {
             $blogArticleQuery = $this->getRepository()->getDetailQuery($blogArticleId);
@@ -493,8 +494,8 @@ class Shopware_Controllers_Frontend_Blog extends Enlight_Controller_Action
     /**
      * Returns all data needed to display the author filter
      *
-     * @param $blogCategoryIds
-     * @param $filter | selected filters
+     * @param int[] $blogCategoryIds
+     * @param array $filter          selected filters
      *
      * @return array
      */
@@ -510,8 +511,8 @@ class Shopware_Controllers_Frontend_Blog extends Enlight_Controller_Action
     /**
      * Returns all data needed to display the tags filter
      *
-     * @param $blogCategoryIds
-     * @param $filter | selected filters
+     * @param int []$blogCategoryIds
+     * @param array $filter | selected filters
      *
      * @return array
      */

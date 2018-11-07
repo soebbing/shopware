@@ -35,7 +35,7 @@ class Shopware_Controllers_Backend_Banner extends Shopware_Controllers_Backend_E
     /**
      * Test repository injection variable
      *
-     * @var
+     * @var \Shopware\Models\Banner\Repository
      * @scope private
      */
     public static $testRepository = null;
@@ -73,7 +73,7 @@ class Shopware_Controllers_Backend_Banner extends Shopware_Controllers_Backend_E
      */
     public function getListAction()
     {
-        /** @var $filter array */
+        /** @var array $filter */
         $filter = $this->Request()->getParam('filter', []);
         $node = (int) $this->Request()->getParam('node');
         $preselectedNodes = $this->Request()->getParam('preselected');
@@ -202,6 +202,7 @@ class Shopware_Controllers_Backend_Banner extends Shopware_Controllers_Backend_E
 
         // add or edit detection
         $tmpId = $this->Request()->get('id');
+        $id = null;
 
         // Collecting form data
         if (!empty($tmpId)) {
@@ -225,19 +226,19 @@ class Shopware_Controllers_Backend_Banner extends Shopware_Controllers_Backend_E
 
         $params = $this->Request()->getParams();
 
-        // build a single from date instead of two parts
+        // Build a single from date instead of two parts
         $params['validFrom'] = $this->prepareDateAndTime($this->Request()->get('validFromDate'), $this->Request()->get('validFromTime'));
-        // build a single till date instead of two dates
+        // Build a single till date instead of two dates
         $params['validTo'] = $this->prepareDateAndTime($this->Request()->get('validToDate'), $this->Request()->get('validToTime'));
         // Get media manager
         $mediaManagerData = $this->Request()->get('media-manager-selection');
 
-        // update database entries
+        // Update database entries
         if (!$createMode) {
-            // load model from db
+            // Load model from db
             $bannerModel = $this->repository->find($id);
         } else {
-            // check if there are none files submitted
+            // Check if there are none files submitted
             if (empty($mediaManagerData)) {
                 $this->View()->assign([
                     'success' => false,
@@ -247,19 +248,19 @@ class Shopware_Controllers_Backend_Banner extends Shopware_Controllers_Backend_E
             }
             $bannerModel = new Banner();
         }
-        // read data
+        // Read data
         $bannerModel->fromArray($params);
 
-        // set new image and extension if necessary
+        // Set new image and extension if necessary
         if (!empty($mediaManagerData)) {
             $bannerModel->setImage($mediaManagerData);
         }
 
-        // strip full qualified url
+        // Strip full qualified url
         $mediaService = $this->get('shopware_media.media_service');
         $bannerModel->setImage($mediaService->normalize($bannerModel->getImage()));
 
-        // write model to db
+        // Write model to db
         try {
             Shopware()->Models()->persist($bannerModel);
             Shopware()->Models()->flush();
@@ -315,7 +316,7 @@ class Shopware_Controllers_Backend_Banner extends Shopware_Controllers_Backend_E
      * Build an array and reformats the date for a banner.
      * If the second parameter is set true, every banner will be tracked.
      *
-     * @param $banners
+     * @param array $banners
      *
      * @return array|null
      */
@@ -348,8 +349,8 @@ class Shopware_Controllers_Backend_Banner extends Shopware_Controllers_Backend_E
     /**
      * Transforms a ISO Date in to an easy processable dateTime Object.
      *
-     * @param $date
-     * @param $time
+     * @param string $date
+     * @param string $time
      *
      * @return DateTime
      */

@@ -153,6 +153,11 @@ class ProductProvider implements ProductProviderInterface
             ContextService::FALLBACK_CUSTOMER_GROUP
         );
 
+        $availability = null;
+        $listingPrices = null;
+        $combinations = null;
+        $configurations = null;
+        $variantConfiguration = null;
         $products = $this->productGateway->getList($numbers, $context);
         $average = $this->voteService->getAverages($products, $context);
         $cheapest = $this->getCheapestPrices($products, $shop->getId());
@@ -315,7 +320,7 @@ class ProductProvider implements ProductProviderInterface
      * @param ListProduct[]        $products
      * @param ShopContextInterface $context
      *
-     * @return \array[]
+     * @return array[]
      */
     private function getProperties($products, ShopContextInterface $context)
     {
@@ -344,7 +349,7 @@ class ProductProvider implements ProductProviderInterface
         $this->fieldHelper->addPropertyOptionTranslation($query, $context);
         $this->fieldHelper->addMediaTranslation($query, $context);
 
-        /** @var $statement \Doctrine\DBAL\Driver\ResultStatement */
+        /** @var \Doctrine\DBAL\Driver\ResultStatement $statement */
         $statement = $query->execute();
 
         $data = $statement->fetchAll(\PDO::FETCH_GROUP);
@@ -385,7 +390,7 @@ class ProductProvider implements ProductProviderInterface
     /**
      * @param Shop          $shop
      * @param ListProduct[] $products
-     * @param $priceRules
+     * @param array         $priceRules
      *
      * @return array
      */
@@ -401,7 +406,7 @@ class ProductProvider implements ProductProviderInterface
             }
             $rules = $priceRules[$number];
 
-            /** @var $context ProductContextInterface */
+            /** @var ProductContextInterface $context */
             foreach ($contexts as $context) {
                 $customerGroup = $context->getCurrentCustomerGroup()->getKey();
                 $key = $customerGroup . '_' . $context->getCurrency()->getId();

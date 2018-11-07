@@ -27,7 +27,7 @@ namespace Shopware\Components;
 use Doctrine\DBAL\Connection;
 
 /**
- * @category  Shopware
+ * @category Shopware
  *
  * @copyright Copyright © shopware AG (http://www.shopware.de)
  */
@@ -106,7 +106,7 @@ class HolidayTableUpdater
                 $calculation
             );
             $calculation = str_replace('EASTERDATE()', "'$easterDate'", $calculation);
-            $calculation = str_replace('YEAR()', "'$year'", $calculation);
+            $calculation = (string) str_replace('YEAR()', "'$year'", $calculation);
 
             $sql = <<<SQL
 UPDATE s_premium_holidays

@@ -29,7 +29,7 @@ namespace Shopware\Components;
  *
  * This class is highly based on Rand.php of Component_ZendMath
  *
- * @category  Shopware
+ * @category Shopware
  *
  * @see      https://github.com/zendframework/zf2/blob/master/library/Zend/Math/Rand.php
  * @see      https://github.com/ircmaxell/RandomLib
@@ -43,8 +43,6 @@ abstract class Random
      * Generate random bytes
      *
      * @param int $length
-     *
-     * @throws \Exception
      *
      * @return string
      */
@@ -102,7 +100,7 @@ abstract class Random
     public static function getFloat()
     {
         $bytes = static::getBytes(7);
-        $bytes[6] = $bytes[6] | chr(0xF0);
+        $bytes[6] = (int) $bytes[6] | (int) chr(0xF0);
         $bytes .= chr(63); // exponent bias (1023)
         list(, $float) = unpack('d', $bytes);
 
@@ -138,7 +136,7 @@ abstract class Random
 
         $listLen = mb_strlen($charlist, '8bit');
 
-        if ($listLen == 1) {
+        if ($listLen === 1) {
             return str_repeat($charlist, $length);
         }
 
@@ -224,7 +222,7 @@ abstract class Random
     /**
      * Return a random element from an array
      *
-     * @param $array
+     * @param array $array
      *
      * @return mixed
      */

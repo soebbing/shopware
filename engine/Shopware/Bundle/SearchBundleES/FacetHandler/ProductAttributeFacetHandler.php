@@ -247,8 +247,8 @@ class ProductAttributeFacetHandler implements HandlerInterface, ResultHydratorIn
 
     /**
      * @param ProductAttributeFacet $criteriaPart
-     * @param $data
-     * @param Criteria $criteria
+     * @param array                 $data
+     * @param Criteria              $criteria
      *
      * @return null|RadioFacetResult|ValueListFacetResult
      */
@@ -264,7 +264,7 @@ class ProductAttributeFacetHandler implements HandlerInterface, ResultHydratorIn
 
         $actives = [];
 
-        /** @var $condition ProductAttributeCondition */
+        /** @var ProductAttributeCondition $condition */
         if ($condition = $criteria->getCondition($criteriaPart->getName())) {
             $actives = $condition->getValue();
         }
@@ -294,8 +294,8 @@ class ProductAttributeFacetHandler implements HandlerInterface, ResultHydratorIn
 
     /**
      * @param ProductAttributeFacet $criteriaPart
-     * @param $data
-     * @param Criteria $criteria
+     * @param array                 $data
+     * @param Criteria              $criteria
      *
      * @return null|BooleanFacetResult
      */
@@ -318,8 +318,8 @@ class ProductAttributeFacetHandler implements HandlerInterface, ResultHydratorIn
 
     /**
      * @param ProductAttributeFacet $criteriaPart
-     * @param $data
-     * @param Criteria $criteria
+     * @param array                 $data
+     * @param Criteria              $criteria
      *
      * @return RangeFacetResult
      */
@@ -332,7 +332,7 @@ class ProductAttributeFacetHandler implements HandlerInterface, ResultHydratorIn
         $activeMin = $min;
         $activeMax = $max;
 
-        /** @var $condition ProductAttributeCondition */
+        /** @var ProductAttributeCondition $condition */
         if ($condition = $criteria->getCondition($criteriaPart->getName())) {
             $data = $condition->getValue();
             $activeMin = $data['min'];

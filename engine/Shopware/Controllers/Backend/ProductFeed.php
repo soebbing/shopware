@@ -60,7 +60,7 @@ class Shopware_Controllers_Backend_ProductFeed extends Shopware_Controllers_Back
     public function getFeedsAction()
     {
         try {
-            /** @var $repository \Shopware\Models\ProductFeed\Repository */
+            /** @var \Shopware\Models\ProductFeed\Repository $repository */
             $repository = Shopware()->Models()->getRepository(ProductFeed::class);
             $dataQuery = $repository->getListQuery(
                 $this->Request()->getParam('sort', []),
@@ -233,7 +233,7 @@ class Shopware_Controllers_Backend_ProductFeed extends Shopware_Controllers_Back
     public function deleteFeedAction()
     {
         try {
-            /** @var $model \Shopware\Models\ProductFeed\ProductFeed */
+            /** @var \Shopware\Models\ProductFeed\ProductFeed $model */
             $model = Shopware()->Models()->getRepository(ProductFeed::class)->find($this->Request()->id);
             Shopware()->Models()->remove($model);
             Shopware()->Models()->flush();
@@ -247,9 +247,9 @@ class Shopware_Controllers_Backend_ProductFeed extends Shopware_Controllers_Back
      * helper method to prepare the association request data to save it directly
      * into the model via fromArray
      *
-     * @param $paramString
-     * @param $modelName
-     * @param $params
+     * @param string $paramString
+     * @param string $modelName
+     * @param array  $params
      *
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
@@ -344,13 +344,13 @@ class Shopware_Controllers_Backend_ProductFeed extends Shopware_Controllers_Back
     /**
      * Returns an array with feed data for the passed feed id.
      *
-     * @param $id
+     * @param int $id
      *
      * @return mixed
      */
     private function getFeed($id)
     {
-        /** @var $repository \Shopware\Models\ProductFeed\Repository */
+        /** @var \Shopware\Models\ProductFeed\Repository $repository */
         $repository = Shopware()->Models()->getRepository(ProductFeed::class);
         $dataQuery = $repository->getDetailQuery($id);
         $feed = $dataQuery->getArrayResult();

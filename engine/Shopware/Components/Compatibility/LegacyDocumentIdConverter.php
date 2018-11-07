@@ -25,6 +25,7 @@
 namespace Shopware\Components\Compatibility;
 
 use Doctrine\DBAL\Driver\Connection;
+use Doctrine\DBAL\Driver\PDOConnection;
 
 /**
  * This class is necessary for a smooth migration to MySQL 8. MySQL 8 forces Ids in foreign key constraints to be lower case.
@@ -44,7 +45,7 @@ use Doctrine\DBAL\Driver\Connection;
 class LegacyDocumentIdConverter
 {
     /**
-     * @var Connection
+     * @var PDOConnection
      */
     private $connection;
 
@@ -59,9 +60,9 @@ class LegacyDocumentIdConverter
     private $isMigrationNecessary;
 
     /**
-     * @param Connection $connection
+     * @param PDOConnection $connection
      */
-    public function __construct(Connection $connection)
+    public function __construct(PDOConnection $connection)
     {
         $this->connection = $connection;
     }

@@ -54,7 +54,7 @@ class Shopware_Controllers_Backend_Translation extends Shopware_Controllers_Back
             'value' => $node,
         ];
 
-        /** @var $repository Shopware\Models\Shop\Repository */
+        /** @var Shopware\Models\Shop\Repository $repository */
         $repository = 'Shopware\Models\Shop\Shop';
         $repository = Shopware()->Models()->getRepository($repository);
 

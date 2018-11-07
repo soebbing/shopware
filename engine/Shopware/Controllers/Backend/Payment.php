@@ -146,7 +146,7 @@ class Shopware_Controllers_Backend_Payment extends Shopware_Controllers_Backend_
     {
         try {
             $id = $this->Request()->getParam('id', null);
-            /** @var $payment Payment */
+            /** @var Payment $payment */
             $payment = Shopware()->Models()->find('Shopware\Models\Payment\Payment', $id);
             $action = $payment->getAction();
             $data = $this->Request()->getParams();
@@ -218,7 +218,7 @@ class Shopware_Controllers_Backend_Payment extends Shopware_Controllers_Backend_
         }
         $repository = Shopware()->Models()->getRepository(Payment::class);
         $id = $this->Request()->get('id');
-        /** @var $model Payment */
+        /** @var Payment $model */
         $model = $repository->find($id);
         if ($model->getSource() == 1) {
             try {
@@ -264,7 +264,7 @@ class Shopware_Controllers_Backend_Payment extends Shopware_Controllers_Backend_
      * - set the correct icon
      * - match the surcharges to the countries
      *
-     * @param $results
+     * @param array $results
      *
      * @return mixed
      */
@@ -280,7 +280,7 @@ class Shopware_Controllers_Backend_Payment extends Shopware_Controllers_Backend_
             $result['text'] = $result['description'] . ' (' . $result['id'] . ')';
             $result['leaf'] = true;
 
-            //Matches the surcharges with the countries
+            // Matches the surcharges with the countries
             if (!empty($result['surchargeString'])) {
                 $surchargeString = $result['surchargeString'];
                 $surcharges = explode(';', $surchargeString);

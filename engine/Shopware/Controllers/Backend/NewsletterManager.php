@@ -756,7 +756,7 @@ class Shopware_Controllers_Backend_NewsletterManager extends Shopware_Controller
     /**
      * Little helper function, that puts the array in the form found in the database originally and serializes it
      *
-     * @param $groups
+     * @param array $groups
      *
      * @return string
      */
@@ -780,7 +780,7 @@ class Shopware_Controllers_Backend_NewsletterManager extends Shopware_Controller
     /**
      * Helper function which takes a serializes group string from the databse and puts it in a flattened form
      *
-     * @param $group
+     * @param string $group
      *
      * @return array
      */

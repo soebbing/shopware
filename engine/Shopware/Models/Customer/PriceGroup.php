@@ -94,7 +94,6 @@ class PriceGroup extends ModelEntity
      */
     public function __construct()
     {
-        $this->discounts = new \Doctrine\Common\Collections\ArrayCollection();
         $this->customers = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -155,7 +154,7 @@ class PriceGroup extends ModelEntity
      * the Customer.group property (OWNING SIDE) and the Group.customers (INVERSE SIDE) property.
      * The customer data is joined over the s_user.groupkey field.
      *
-     * @param $customers \Doctrine\Common\Collections\ArrayCollection
+     * @param \Doctrine\Common\Collections\ArrayCollection $customers
      */
     public function setCustomers($customers)
     {

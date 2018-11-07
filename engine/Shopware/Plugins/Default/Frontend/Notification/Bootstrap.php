@@ -325,7 +325,7 @@ class Shopware_Plugins_Frontend_Notification_Bootstrap extends Shopware_Componen
                 continue;
             }
 
-            /* @var $shop \Shopware\Models\Shop\Shop */
+            /* @var \Shopware\Models\Shop\Shop $shop */
             $shop = $modelManager->getRepository(\Shopware\Models\Shop\Shop::class)->getActiveById($notify['language']);
             $shop->registerResources();
 

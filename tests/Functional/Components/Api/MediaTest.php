@@ -47,7 +47,7 @@ class MediaTest extends TestCase
         $source = __DIR__ . '/fixtures/test-bild.jpg';
         $dest = __DIR__ . '/fixtures/test-bild-used.jpg';
 
-        //copy image to execute test case multiple times.
+        // Copy image to execute test case multiple times.
         @unlink($dest);
         copy($source, $dest);
 
@@ -61,7 +61,7 @@ class MediaTest extends TestCase
         $this->resource->create($data);
         static::assertTrue($mediaService->has($path));
 
-        //check if the thumbnails are generated
+        // Check if the thumbnails are generated
         $path = Shopware()->DocPath('media_image_thumbnail') . 'test-bild-used_140x140.jpg';
         static::assertTrue($mediaService->has($path));
 
@@ -74,7 +74,7 @@ class MediaTest extends TestCase
         $source = __DIR__ . '/fixtures/test-bild.jpg';
         $dest = __DIR__ . '/fixtures/test-bild-with-more-than-50-characaters-more-more-more-more-used.jpg';
 
-        //copy image to execute test case multiple times.
+        // Copy image to execute test case multiple times.
         @unlink($dest);
         copy($source, $dest);
 
@@ -85,7 +85,7 @@ class MediaTest extends TestCase
         $mediaService = Shopware()->Container()->get('shopware_media.media_service');
         static::assertTrue($mediaService->has($pathPicture));
 
-        //check if the thumbnails are generated
+        // Check if the thumbnails are generated
         $path = Shopware()->DocPath('media_image_thumbnail') . $media->getName() . '_140x140.jpg';
         static::assertTrue($mediaService->has($path));
 
@@ -129,7 +129,7 @@ class MediaTest extends TestCase
         $source = __DIR__ . '/fixtures/test-bild.jpg';
         $dest = __DIR__ . '/fixtures/test-bild-used.jpg';
 
-        //copy image to execute test case multiple times.
+        // Copy image to execute test case multiple times.
         @unlink($dest);
         copy($source, $dest);
 
@@ -142,7 +142,7 @@ class MediaTest extends TestCase
 
         $media = $this->resource->create($data);
 
-        //check if the thumbnails are generated
+        // Check if the thumbnails are generated
         $this->resource->update($media->getId(), $updateData);
 
         $content = base64_encode($mediaService->read($path));
@@ -159,7 +159,7 @@ class MediaTest extends TestCase
         $source = __DIR__ . '/fixtures/test-bild.jpg';
         $dest = __DIR__ . '/fixtures/test-bild-used.foo';
 
-        //copy image to execute test case multiple times.
+        // Copy image to execute test case multiple times.
         @unlink($dest);
         copy($source, $dest);
 
@@ -175,6 +175,46 @@ class MediaTest extends TestCase
         $this->resource->create($data);
 
         unlink($dest);
+    }
+
+    public function testCanDeleteMedia()
+    {
+        $data = $this->getExtendedTestData();
+        $source = __DIR__ . '/fixtures/test-bild.jpg';
+        $dest = __DIR__ . '/fixtures/test-bild-used.jpg';
+        $secondDest = __DIR__ . '/fixtures/another-test-bild-used.jpg';
+
+        // Copy image to execute test case multiple times.
+        @unlink($dest);
+        @unlink($secondDest);
+        copy($source, $dest);
+        copy($source, $secondDest);
+
+        $data['file'] = $dest;
+        $path = Shopware()->DocPath('media_image') . 'test-bild-used.jpg';
+        $mediaService = Shopware()->Container()->get('shopware_media.media_service');
+        if ($mediaService->has($path)) {
+            $mediaService->delete($path);
+        }
+        $media = $this->resource->create($data);
+        static::assertTrue($mediaService->has($path));
+
+        $data['file'] = $secondDest;
+        $anotherPath = Shopware()->DocPath('media_image') . 'another-test-bild-used.jpg';
+        $mediaService = Shopware()->Container()->get('shopware_media.media_service');
+        if ($mediaService->has($anotherPath)) {
+            $mediaService->delete($anotherPath);
+        }
+        $anotherMedia = $this->resource->create($data);
+        static::assertTrue($mediaService->has($anotherPath));
+
+        $this->resource->delete($media->getId());
+        $this->resource->delete($anotherMedia->getId());
+        static::assertFalse($mediaService->has($path));
+        static::assertFalse($mediaService->has($anotherPath));
+
+        unlink($dest);
+        @unlink($secondDest);
     }
 
     protected function getSimpleTestData()
